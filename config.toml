@@ -1,5 +1,4 @@
-baseURL = "https://www.ssungwxx.github.io/"
+baseURL = "https://ssungwxx.github.io/"
+languageCode = "ko-kr"
 title = "Sungwoo Kim"
 theme = "hugo-coder"
-defaultContentLanguage = "en"
-paginate = 20
