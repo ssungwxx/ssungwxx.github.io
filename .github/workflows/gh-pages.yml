@@ -27,5 +27,5 @@ jobs:
         with:
           github_token: ${{ secrets.HUGO_TOKEN  }}
           publish_dir: ./public
-          publish_branch: blog
+          publish_branch: master
           force_orphan: true
