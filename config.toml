@@ -2,3 +2,8 @@ baseURL = "https://ssungwxx.github.io/"
 languageCode = "ko-kr"
 title = "Sungwoo Kim"
 theme = "hugo-coder"
+
+[[menu.main]]
+  name = "Blog"
+  weight = 1
+  url = "posts/"
