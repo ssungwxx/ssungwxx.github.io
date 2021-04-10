@@ -1,0 +1,64 @@
+baseURL: "https://ssungwxx.github.io/"
+title: SugnwooKim
+paginate: 5
+theme: hugo-PaperMod
+
+enableInlineShortcodes: true
+enableRobotsTXT: true
+buildDrafts: false
+buildFuture: false
+buildExpired: false
+enableEmoji: true
+
+minify:
+  disableXML: true
+
+DefaultContentLanguage: ko
+
+languages:
+  ko:
+    languageName: "Korean"
+    weight: 1
+    menu:
+      main:
+        - name: Archive
+          url: archives
+          weight: 5
+        - name: Search
+          url: search/
+          weight: 10
+        - name: Tags
+          url: tags/
+          weight: 10
+        - name: Categories
+          url: categories/
+          weight: 10
+
+params:
+  env: production
+  title: ssungwxx.github.io
+  author: Sungwoo Kim
+
+  images: ["papermod-cover.png"]
+
+  ShowShareButtons: true
+  comments: true
+  defaultTheme: auto
+  disableThemeToggle: false
+  disableSpecail1stPost: false
+
+  assets:
+    disableFingerprinting: true
+
+  label:
+    text: "My little and precious blog "
+
+  homeInfoParams:
+    Title: Hi there I'm here
+    Content: Welcome to my blog :)
+
+    socialIcons:
+      - name: github
+        url: 'https://github.com/ssungwxx'
+      - name: email
+        url: sungwoo.dev@gmail.com
