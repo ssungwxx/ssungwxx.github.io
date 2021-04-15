@@ -36,7 +36,7 @@ languages:
 
 params:
   env: production
-  title: ssungwxx.github.io
+  title: https://ssungwxx.github.io
   author: Sungwoo Kim
 
   images: ["papermod-cover.png"]
@@ -51,14 +51,13 @@ params:
     disableFingerprinting: true
 
   label:
-    text: "My little and precious blog "
+    text: "Software engineer blog"
 
   homeInfoParams:
     Title: Hi there I'm here
     Content: Welcome to my blog :)
-
     socialIcons:
       - name: github
-        url: 'https://github.com/ssungwxx'
+        url: "https://github.com/ssungwxx"
       - name: email
-        url: sungwoo.dev@gmail.com
+        url: "sungwoo.dev@gmail.com"
