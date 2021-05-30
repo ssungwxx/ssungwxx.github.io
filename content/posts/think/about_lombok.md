@@ -2,6 +2,7 @@
 title: "Java Lombok 사용에 관하여"
 date: 2021-05-17T20:22:26+09:00
 draft: false
+tags: ["lombok"]
 ---
 # Lomnok에 대한 생각
 ## 처음 Lombok을 알게 되었을 때
