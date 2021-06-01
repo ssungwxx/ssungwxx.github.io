@@ -1,7 +1,7 @@
 ---
 title: "모던 자바 인 액션 스터디 시작 계기"
 date: 2021-05-09T21:59:38+09:00
-draft: false
+draft: true
 tags: ["java"]
 ---
 ### 읽게 된 계기
