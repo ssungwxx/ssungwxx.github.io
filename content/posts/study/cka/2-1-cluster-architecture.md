@@ -1,8 +1,8 @@
 ---
-title: "2 1 Cluster Architecture"
+title: "2-1 Cluster Architecture"
 date: 2021-06-06T14:40:52+09:00
 draft: true
-tags: ["CKA", "kubernetes"]
+tags: ["kubernetes"]
 ---
 # 쿠버네티스의 클러스터 구조
 ## 시작하기에 앞서
@@ -10,7 +10,7 @@ tags: ["CKA", "kubernetes"]
 
 먼저, 각 클러스터의 각 컴포넌트들의 기능과 역할에 대해 알아본다. 쿠버네티스의 아키텍쳐를 선박들에 비유하며 설명할 예정이다.
 
-| Kuberntes 라는 명칭의 유래는 Helmsman(조타수)를 의미하는 그리스어에서 유래했다. 또한, Kubernetes는 Container Orchestration 이기 때문에 내부 클러스터들의 동작이 선박들이 움직이는 모습에 비유를 많이한다.
+> Kuberntes 라는 명칭의 유래는 Helmsman(조타수)를 의미하는 그리스어에서 유래했다. 또한, Kubernetes는 Container Orchestration 이기 때문에 내부 클러스터들의 동작이 선박들이 움직이는 모습에 비유를 많이한다.
 
 쿠버네티스에는 두가지의 선박들로 비유를 할 수 있다. 하나는 직접 바디를 건너 컨테이너를 옮기고 컨트롤 하는 Cargo ship(화물선), 다른 하나는 이러한 화물선들을 지켜보고 관리하는 Control ship이다.
 
