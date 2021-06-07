@@ -41,7 +41,8 @@ ETCD를 HA(High availability)모드로 사용할 경우 여러개의 ETCD 인스
 
 위에 관한 더 자세한 내용은 다음에 배울 챕터에서 다룰 예정이다.
 
-## Command
+## ETCDCLI
+### Version의 차이
 ETCD의 CLI 조작을 위한 ETCDCTL은 Version2와 Version3에는 차이점이 있다.
 
 예를들어, Version2에서는 아래와 같은 명령어를 지원한다.
@@ -67,3 +68,24 @@ export ETCDCTL_API=3
 ```
 
 만약 해당 API version이 명시가 되있지 않다면 Version2로 제공될 것이다.
+
+### Certificate
+인증을 하기위한 파일은 ***ETCD Master***에 포함된다. 설정하는데 필요한 경로는 아래와같다.
+```cmd
+--cacert /etc/kubernetes/pki/etcd/ca.crt     
+--cert /etc/kubernetes/pki/etcd/server.crt     
+--key /etc/kubernetes/pki/etcd/server.key
+```
+
+복잡해지보이지만 사실 위 내용들은 아래와 같은 명령어로 정의할 수 있다.
+
+```cmd
+kubectl exec etcd-master -n kube-system \
+ -- sh -c "ETCDCTL_API=3 \
+ etcdctl get / --prefix \
+ --keys-only \
+ --limit=10 \
+ --cacert /etc/kubernetes/pki/etcd/ca.crt \
+ --cert /etc/kubernetes/pki/etcd/server.crt \
+ --key /etc/kubernetes/pki/etcd/server.key"
+```
