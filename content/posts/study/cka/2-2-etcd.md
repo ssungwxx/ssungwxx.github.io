@@ -40,3 +40,30 @@ Key-value Store는 ***key*** 와 ***value*** 형태로 저장되는 데이터 �
 ETCD를 HA(High availability)모드로 사용할 경우 여러개의 ETCD 인스턴스들을 Master node에 가지게 될 것이다. 이러한 경우 ETCD는 각 서비스가 올바른 정보를 가지고 있는지 확인할 수 있어야한다. 이는 ```initial-cluster- controller``` 옵션을 통해 설정할 수 있다.
 
 위에 관한 더 자세한 내용은 다음에 배울 챕터에서 다룰 예정이다.
+
+## Command
+ETCD의 CLI 조작을 위한 ETCDCTL은 Version2와 Version3에는 차이점이 있다.
+
+예를들어, Version2에서는 아래와 같은 명령어를 지원한다.
+```cmd
+etcdtl backup
+etcdtl cluster-health
+etcdtl mk
+etcdtl mkdir
+etcdtl set
+```
+
+위와같은 커맨드들은 Version3에서는 아래와 같은 형태로 지원된다.
+```cmd
+etcdtl snapshot save
+etcdtl endpoint health
+etcdtl get
+etcdtl put
+```
+
+API의 버전을 설정하기 위해서는 아래와 같은 명령어를 사용한다.
+```
+export ETCDCTL_API=3
+```
+
+만약 해당 API version이 명시가 되있지 않다면 Version2로 제공될 것이다.
