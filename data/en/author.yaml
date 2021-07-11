@@ -1,0 +1,16 @@
+name: "Sungwoo Kim"
+nickname: "Sungwoo"
+image: "images/ssungwxx-cat.png"
+
+# greeting message before your name. it will default to "Hi! I am" if not provided
+greeting: "Hi, I am"
+
+# give your contact information. they will be used in the footer
+contactInfo:
+  email: "sungwoo.dev@gmail.com"
+
+# a summary of what you do
+summary:
+- I am a software enginner with craftsmanship
+- I work with Java, Spring, Kubernetes
+- I love to work with other people
