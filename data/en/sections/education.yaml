@@ -1,0 +1,35 @@
+# section information
+section:
+  name: Education
+  id: education
+  template: sections/education.html # Use "sections/education-alt.html for alternate template.
+  enable: true
+  weight: 4
+  showOnNavbar: true
+  # Can optionally hide the title in sections
+  # hideTitle: true
+
+degrees:
+- name: SSAFY
+  icon: fa-microscope
+  timeframe: 2016-2020
+  institution:
+    name: 삼성 청년 소프트웨어 아카데미
+    url: "#"
+  takenCourses: #(optional)
+    showGrades: false
+    courses:
+      - name: Java, Web, DB, 알고리즘 중심의 1학기 과정 800시간, 팀 프로젝트 3번으로 구성된 2학기 과정 800시간. 총 1600시간 수료
+      - name: 삼성 소프트웨어 A+ 등급 취득 및 1학기 성적우수상 수여
+- name: Inha techinal colleage
+  icon: fa-university
+  timeframe: 2013-2019
+  institution:
+    name: 인하공업전문대학
+    url: "#"
+  takenCourses: #(optional)
+    showGrades: false
+    courses:
+      - name: 컴퓨터정보공학과 학사
+      - name: 컴퓨터정보과 전문학사
+  

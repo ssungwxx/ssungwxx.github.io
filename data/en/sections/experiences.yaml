@@ -33,23 +33,10 @@ experiences:
     # location: Nowhere
     overview: 클라우드팀 텔레메트리파트
   positions:
-  - designation: Software Engineer
+  - designation: Intern
     start: 2019.12
     end: 2020.02
     responsibilities:
     - MSA 환경 Tracing관련 오픈조스 조사 (OpenTelemetry, OpenTracing, OpenCensus 위주)
     - OpenTelemetry + Jaeger를 활용한 Tracing 개발 가이드, 데모 어플리케이션 개발
     - Jaeger collector 테스트를 위한 Synthetic-trace-generator 개발 (Golang)
-
-- company:
-    name: SSAFY
-    # url: "https://www.preexample.com"
-    # location: Nowhere
-    overview: 삼성 청년 소프트웨어 아카데미
-  positions:
-  - designation: 교육생
-    start: 2018.12
-    end: 2019.12
-    responsibilities:
-    - 1학기 기본과정, 2학기 프로젝트 위주 과정 총 1600시간 이수과정 수료
-    - 삼성 소프트웨어 등급 A+ 취득, 1학기 성적 우수상 수여
