@@ -39,3 +39,12 @@ params:
 
   # specify whether you want to show Table of Contents in reading page
   enableTOC: true
+
+  background: images/background-sunset.jpeg
+  logo:
+    main: images/cat.png
+    inverted: images/cat.png
+    favicon: images/cat.png
+
+  newsletter:
+    enable: false
