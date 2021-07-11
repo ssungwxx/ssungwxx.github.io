@@ -1,19 +1,8 @@
-baseURL: "https://ssungwxx.github.io/"
-title: SugnwooKim
-paginate: 5
-theme: hugo-PaperMod
+baseURL: https://ssungwxx.github.io
 
-enableInlineShortcodes: true
-enableRobotsTXT: true
-buildDrafts: false
-buildFuture: false
-buildExpired: false
-enableEmoji: true
+title: "SugnwooKim's place"
+theme: "toha"
 
-googleAnalytics: UA-123-45
-
-minify:
-  disableXML: true
 
 DefaultContentLanguage: ko
 
@@ -21,51 +10,32 @@ languages:
   ko:
     languageName: "Korean"
     weight: 1
-    menu:
-      main:
-        - name: Archive
-          url: archives
-          weight: 5
-        - name: Search
-          url: search/
-          weight: 10
-        - name: Tags
-          url: tags/
-          weight: 10
-        - name: Categories
-          url: categories/
-          weight: 10
+
+# Control TOC depth
+markup:
+  tableOfContents:
+    startLevel: 2
+    endLevel: 6
+    ordered: false
+ 
+# At least HTML and JSON are required for the main HTML content and
+# client-side JavaScript search
+outputs:
+  home:
+  - HTML
+  - RSS
+  - JSON
+
+# Enable global emoji support
+enableEmoji: true
 
 params:
-  env: production
-  title: https://ssungwxx.github.io
-  author: Sungwoo Kim
+  # GitHub repo URL and branch of your site
+  gitRepo: https://github.com/ssungwxx/ssungwxx.github.io
+  gitBranch: main
 
-  images: ["papermod-cover.png"]
+  # specify whether you want to write some blog posts or not
+  enableBlogPost: true
 
-  ShowShareButtons: true
-  comments: true
-  defaultTheme: auto
-  disableThemeToggle: false
-  disableSpecail1stPost: false
-
-  assets:
-    disableFingerprinting: true
-
-  label:
-    text: "Software engineer blog"
-
-  homeInfoParams:
-    Title: 김성우 | SungwooKim
-    Content: |
-      안녕하세요 새로운 도전을 좋아하는 개발자 김성우입니다. \
-      필요하다고 느끼기전에 미리 새로운 것을 알아보고 선행하는 작업을 좋아합니다. 최근 관심을 가지고 있는 도메인은  ***Spring***과 ***Kubernetes*** 입니다. \
-      ***자동화***와 ***간결함***을 좋아하여 복잡하고 반복되는 것을 줄일려고 노력합니다. 새로운 코드를 짜서 추가하는 것보다 기존의 코드를 개선하여 간결하고 효율적으로 작업하고자 노력합니다. \
-      개발뿐만 아니라 게임, 칵테일 제조, 먹거리 탐방, 고양이도 좋아합니다. 누구든 만나게 된다면 다양한 이야기를 나누고 싶어요. 🙋🏻
-  socialIcons:
-    - name: github
-      url: "https://github.com/ssungwxx"
-    - name: email
-      url: "sungwoo.dev@gmail.com"
-    - name: linkedin
-      url: "https://www.linkedin.com/in/sungwoo-kim-3ab2101a4/"
+  # specify whether you want to show Table of Contents in reading page
+  enableTOC: true
