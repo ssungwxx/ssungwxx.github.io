@@ -11,32 +11,45 @@ section:
 # Your experiences
 experiences:
 - company:
-    name: Example Co.
-    url: "https://www.example.com"
-    location: Dhaka Branch
+    name: Seculetter
+    # url: "https://www.example.com"
+    # location: 판교
     # company overview
-    overview: Example Co. is a widely recognized company for cloud-native development. It builds tools for Kubernetes.
+    overview: 클라우드팀
   positions:
-  - designation: Senior Software Engineer
-    start: Nov 2019
+  - designation: Software Engineer
+    start: 2020.12
     # don't provide end date if you are currently working there. It will be replaced by "Present"
     # end: Dec 2020
     # give some points about what was your responsibilities at the company.
     responsibilities:
-    - Design and develop XYZ tool for ABC task
-    - Design, develop and manage disaster recovery tool [Xtool](https://www.example.com) that backup Kubernetes volumes, databases, and cluster's resource definition.
-    - Lead backend team.
+    - 위협 인텔리전스 서비스 협력사 데이터 Collector 개발(Java11, Spring Boot, Golang)
+    - 해외 영업을 위한 라이센스 매니저 개발(Java11, Spring Boot, Kubernetes, Prometheus)
+    - 클라우드 서비스를 위한 중앙 로깅 플랫폼 구축 (ELK)
 
 - company:
-    name: PreExample Co.
-    url: "https://www.preexample.com"
-    location: Nowhere
-    overview: PreExample Co. is a gateway company to enter into Example co. So, nothing special here.
+    name: Kakao
+    # url: "https://www.preexample.com"
+    # location: Nowhere
+    overview: 클라우드팀 텔레메트리파트
   positions:
   - designation: Software Engineer
-    start: March 2016
-    end: May 2017
+    start: 2019.12
+    end: 2020.02
     responsibilities:
-    - Write lots of example codes.
-    - Read lots of examples.
-    - See lots of example videos.
+    - MSA 환경 Tracing관련 오픈조스 조사 (OpenTelemetry, OpenTracing, OpenCensus 위주)
+    - OpenTelemetry + Jaeger를 활용한 Tracing 개발 가이드, 데모 어플리케이션 개발
+    - Jaeger collector 테스트를 위한 Synthetic-trace-generator 개발 (Golang)
+
+- company:
+    name: SSAFY
+    # url: "https://www.preexample.com"
+    # location: Nowhere
+    overview: 삼성 청년 소프트웨어 아카데미
+  positions:
+  - designation: 교육생
+    start: 2018.12
+    end: 2019.12
+    responsibilities:
+    - 1학기 기본과정, 2학기 프로젝트 위주 과정 총 1600시간 이수과정 수료
+    - 삼성 소프트웨어 등급 A+ 취득, 1학기 성적 우수상 수여
