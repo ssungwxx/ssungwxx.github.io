@@ -38,3 +38,16 @@ params:
     main: images/cat.png
     inverted: images/cat.png
     favicon: images/cat.png
+
+  features:
+    # Enable and configure portfolio
+    portfolio:
+      enable: true
+    # Enable and configure blog posts
+    blog:
+      enable: true
+    # Enable & configure "Notes" features
+    notes:
+      enable: true
+
+
