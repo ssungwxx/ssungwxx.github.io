@@ -1,8 +1,6 @@
 ---
 title: "2-8 Pod"
 date: 2021-06-24T22:57:56+09:00
-draft: true
-tags: ["kubernetes"]
 ---
 
 # Pod

@@ -1,8 +1,6 @@
 ---
 title: "2-6 Kubelet"
 date: 2021-06-24T21:24:07+09:00
-draft: true
-tags: ["kubernetes"]
 ---
 
 # Kubelet

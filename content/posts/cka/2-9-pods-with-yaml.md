@@ -1,8 +1,6 @@
 ---
 title: "2-9 Pods With Yaml"
 date: 2021-06-24T23:44:29+09:00
-draft: true
-tags: ["kubernetes"]
 ---
 
 # Kubernetes yaml 형식

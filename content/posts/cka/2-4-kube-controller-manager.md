@@ -1,8 +1,6 @@
 ---
 title: "2-4 Kube Controller Manager"
 date: 2021-06-11T01:17:14+09:00
-draft: true
-tags: ["kubernetes"]
 ---
 
 # Kube controller manager

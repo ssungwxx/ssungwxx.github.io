@@ -1,8 +1,6 @@
 ---
 title: "Modern_java_in_action_part_2"
 date: 2021-06-22T23:31:46+09:00
-draft: true
-tags: ["java"]
 ---
 
 # 동적 파라미터화 코드 전달하기

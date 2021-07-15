@@ -1,8 +1,6 @@
 ---
 title: "1-1 Course Introduction"
 date: 2021-06-05T23:32:19+09:00
-draft: true
-tags: ["CKA", "kubernetes"]
 ---
 
 # Udemy CKA 강좌 소개 및 설명

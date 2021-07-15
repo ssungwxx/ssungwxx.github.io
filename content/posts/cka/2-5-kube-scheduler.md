@@ -1,8 +1,6 @@
 ---
 title: "2-5 Kube Scheduler"
 date: 2021-06-11T01:26:33+09:00
-draft: true
-tags: ["kubernetes"]
 ---
 
 # Kube Secheduler

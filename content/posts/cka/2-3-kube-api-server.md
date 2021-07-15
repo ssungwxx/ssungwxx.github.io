@@ -1,8 +1,6 @@
 ---
 title: "2-3 Kube Api Server"
 date: 2021-06-08T13:22:59+09:00
-draft: true
-tags: ["kubernetes"]
 ---
 
 # Kube-api server

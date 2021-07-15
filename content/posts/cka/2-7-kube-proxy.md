@@ -1,8 +1,6 @@
 ---
 title: "2-7 Kube Proxy"
 date: 2021-06-24T21:50:10+09:00
-draft: true
-tags: ["kubernetes"]
 ---
 
 # Kube proxy

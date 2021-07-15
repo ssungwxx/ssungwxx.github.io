@@ -1,8 +1,6 @@
 ---
 title: "2-1 Cluster Architecture"
 date: 2021-06-06T14:40:52+09:00
-draft: true
-tags: ["kubernetes"]
 ---
 
 # 쿠버네티스의 클러스터 구조

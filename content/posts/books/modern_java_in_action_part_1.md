@@ -1,8 +1,6 @@
 ---
 title: "Modern_java_in_action_part_1"
 date: 2021-06-21T22:52:28+09:00
-draft: true
-tags: ["java"]
 ---
 
 # Java 8, 9, 10, 11 : 무슨 일이 일어나고 있는가?

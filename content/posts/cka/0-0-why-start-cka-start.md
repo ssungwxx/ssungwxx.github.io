@@ -1,8 +1,6 @@
 ---
 title: "0-0 Why Start CKA Study Start"
 date: 2021-06-04T22:43:24+09:00
-draft: true
-tags: ["CKA", "kubernetes"]
 ---
 
 # 왜 CKA 공부를 시작하는가?

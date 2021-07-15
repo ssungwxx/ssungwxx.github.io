@@ -1,8 +1,6 @@
 ---
 title: "2-2 ETCD"
 date: 2021-06-06T15:42:19+09:00
-draft: true
-tags: ["kubernetes", "ETCD"]
 ---
 
 # ETCD란?
