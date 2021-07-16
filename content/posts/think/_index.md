@@ -8,8 +8,8 @@ menu:
     weight: 10
 ---
 
-Greeting! This is an introduction post. This post tests the followings:
+안녕하세요!
 
-- Hero image is in the same directory as the post.
-- This post should be at top of the sidebar.
-- Post author should be the same as specified in `author.yaml` file.
+개인적인 생각을 적는 공간입니다. 제가 개발하면서 느낀점을 기록하고 뒤돌아보기 위한 메모를 하는 곳 입니다. 만약 잘못 생각하고 있거나 반대의 의견을 가지고 계신다면 함께 얘기도 나눠보고 싶어요.
+
+커피챗, 메일 등 언제든지 환영합니다. 아직 아는게 별로 없는 주니어 개발자지만 다양한 사람들의 경험과 이야기를 듣고 싶어요.
