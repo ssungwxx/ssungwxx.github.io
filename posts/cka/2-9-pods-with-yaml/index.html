@@ -1,0 +1,237 @@
+<!doctype html><html>
+<head>
+<title>2-9 Pods With Yaml</title>
+<meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<meta http-equiv=x-ua-compatible content="ie=edge">
+<link rel=stylesheet href=/css/bootstrap.min.css>
+<link rel=stylesheet href=/css/layouts/main.css>
+<link rel=stylesheet href=/css/navigators/navbar.css>
+<link rel=stylesheet href=/css/plyr.css>
+<link rel=stylesheet href=/css/flag-icon.min.css>
+<link href="https://fonts.googleapis.com/css2?family=Muli:wght@300;400;500;600" rel=stylesheet>
+<link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css>
+<link rel=icon type=image/png href=/images/cat_hub23ece23f2d77e6bbe48bda0392cd399_19313_42x0_resize_box_3.png>
+<meta property="og:title" content="2-9 Pods With Yaml">
+<meta property="og:description" content="Kubernetes yaml 형식 apiVersion: kind: metadata: spec: 일반적인 yaml형식은 위와같다.
+ apiVersion: 사용하려는 오브젝트에 따라 다르게 기술된다. 대표적인 예시는 다음과 같다.     kind Version     Pod v1   Service v1   ReplicaSet apps/v1   Deployment apps/v1      kind: 생성할 오브젝트의 타입을 지정한다. 여기에서는 pod를 만들거기에 pod라 기술한다. 위 표에서 왼쪽 필드에 있는 오브젝트들이 여기에 해당한다.
+  metadata: 위에서 소개된 2가지와는 다르게 string 타입이 아닌 dictionary타입이 기술된다.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://ssungwxx.github.io/posts/cka/2-9-pods-with-yaml/"><meta property="article:section" content="posts">
+<meta property="article:published_time" content="2021-06-24T23:44:29+09:00">
+<meta property="article:modified_time" content="2021-06-24T23:44:29+09:00">
+<meta name=description content="2-9 Pods With Yaml">
+<link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/atom-one-dark.min.css>
+<link rel=stylesheet href=/css/layouts/single.css>
+<link rel=stylesheet href=/css/navigators/sidebar.css>
+<link rel=stylesheet href=/css/style.css>
+</head>
+<body data-spy=scroll data-target=#TableOfContents data-offset=80>
+<div class="container-fluid bg-dimmed wrapper">
+<nav class="navbar navbar-expand-xl top-navbar final-navbar shadow">
+<div class=container>
+<button class="navbar-toggler navbar-light" id=sidebar-toggler type=button onclick=toggleSidebar()>
+<span class=navbar-toggler-icon></span>
+</button>
+<a class=navbar-brand href=/>
+<img src=/images/cat_hub23ece23f2d77e6bbe48bda0392cd399_19313_42x0_resize_box_3.png alt=Logo>
+SugnwooKim's place</a>
+<button class="navbar-toggler navbar-light" id=toc-toggler type=button onclick=toggleTOC()>
+<span class=navbar-toggler-icon></span>
+</button>
+<div class="collapse navbar-collapse lang-selector" id=top-nav-items>
+<ul class="navbar-nav ml-auto">
+</ul>
+</div>
+</div>
+<img src=/images/cat_hub23ece23f2d77e6bbe48bda0392cd399_19313_42x0_resize_box_3.png class=d-none id=main-logo alt=Logo>
+<img src=/images/cat_hub23ece23f2d77e6bbe48bda0392cd399_19313_42x0_resize_box_3.png class=d-none id=inverted-logo alt="Inverted Logo">
+</nav>
+<section class=sidebar-section id=sidebar-section>
+<div class=sidebar-holder>
+<div class=sidebar id=sidebar>
+<form class=mx-auto method=get action=/search>
+<input type=text name=keyword placeholder=Search data-search id=search-box>
+</form>
+<div class=sidebar-tree>
+<ul class=tree id=tree>
+<li id=list-heading><a href=/posts data-filter=all>Posts</a></li>
+<div class=subtree>
+<li><a href=/posts/books/ title=Books>Books</a></li>
+<li><a class=active href=/posts/cka/ title=CKA>CKA</a></li>
+<li><a href=/posts/think/ title=Think>Think</a></li>
+</div>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section class=content-section id=content-section>
+<div class=content>
+<div class="container p-0 read-area">
+<div class="hero-area col-sm-12" id=hero-area style=background-image:url(https://ssungwxx.github.io/images/default-hero.jpg)>
+</div>
+<div class=page-content>
+<div class="author-profile ml-auto align-self-lg-center">
+<img class=rounded-circle src=/images/ssungwxx-cat_hud43b4e68d4b4ab15c9ac212b7a8045bd_2287733_120x120_fit_box_3.png alt="Author Image">
+<h5 class=author-name>Sungwoo Kim</h5>
+<p>June 24, 2021</p>
+</div>
+<div class=title>
+<h1>2-9 Pods With Yaml</h1>
+</div>
+<div class=post-content id=post-content>
+<h1 id=kubernetes-yaml-형식>Kubernetes yaml 형식</h1>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#f92672>apiVersion</span>:
+<span style=color:#f92672>kind</span>:
+<span style=color:#f92672>metadata</span>:
+<span style=color:#f92672>spec</span>:
+</code></pre></div><p>일반적인 yaml형식은 위와같다.</p>
+<ul>
+<li>apiVersion: 사용하려는 오브젝트에 따라 다르게 기술된다. 대표적인 예시는 다음과 같다.</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>kind</th>
+<th>Version</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Pod</td>
+<td>v1</td>
+</tr>
+<tr>
+<td>Service</td>
+<td>v1</td>
+</tr>
+<tr>
+<td>ReplicaSet</td>
+<td>apps/v1</td>
+</tr>
+<tr>
+<td>Deployment</td>
+<td>apps/v1</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>
+<p>kind: 생성할 오브젝트의 타입을 지정한다. 여기에서는 pod를 만들거기에 pod라 기술한다. 위 표에서 왼쪽 필드에 있는 오브젝트들이 여기에 해당한다.</p>
+</li>
+<li>
+<p>metadata: 위에서 소개된 2가지와는 다르게 string 타입이 아닌 dictionary타입이 기술된다.</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#f92672>metadata</span>:
+  <span style=color:#f92672>name</span>: <span style=color:#ae81ff>myapp-pod</span>
+  <span style=color:#f92672>labels</span>:
+    <span style=color:#f92672>app</span>: <span style=color:#ae81ff>myapp</span>
+    <span style=color:#f92672>type</span>: <span style=color:#ae81ff>front-end</span>
+</code></pre></div></li>
+<li>
+<p>spec: dictionary 형태로 정의된다. 여기에는 컨테이너들에 관한 정보가 들어간다. 또한 이 컨테이너에관한 정보는 여러가지가 들어가서 multi-container pod를 구성할 수도 있다.</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#f92672>spec</span>:
+<span style=color:#f92672>containers</span>:
+    - <span style=color:#f92672>name</span>: <span style=color:#ae81ff>nginx-container</span>
+    <span style=color:#f92672>image</span>: <span style=color:#ae81ff>nginx</span>
+</code></pre></div><p>name 앞쪽을 보면 **-**가 들어가 있는 것을 볼 수 있다. 이것은 해당 아이템이 리스트에서 첫 번째 요소라는 것을 의미한다.</p>
+</li>
+</ul>
+<h2 id=command>command</h2>
+<h3 id=모든-pod의-정보를-가져오기>모든 Pod의 정보를 가져오기</h3>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl get pods
+</code></pre></div><h3 id=특정-파드의-정보에-대해-조회하기>특정 파드의 정보에 대해 조회하기</h3>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl describe pod myapp-pod
+</code></pre></div>
+</div>
+<div class=btn-improve-page>
+<a href=https://github.com/ssungwxx/ssungwxx.github.io/edit/main/content/posts/cka/2-9-pods-with-yaml.md title="Improve this page" target=_blank rel=noopener>
+<i class="fas fa-code-branch"></i>
+Improve this page
+</a>
+</div>
+<hr>
+<div class="row next-prev-navigator">
+</div>
+<hr>
+</div>
+</div>
+</div>
+<a id=scroll-to-top class=btn><i class="fas fa-chevron-circle-up"></i></a>
+</section>
+<section class=toc-section id=toc-section>
+<div class=toc-holder>
+<h5 class="text-center pl-3">Table of Contents</h5>
+<hr>
+<div class=toc>
+<nav id=TableOfContents>
+<ul>
+<li><a href=#command>command</a>
+<ul>
+<li><a href=#모든-pod의-정보를-가져오기>모든 Pod의 정보를 가져오기</a></li>
+<li><a href=#특정-파드의-정보에-대해-조회하기>특정 파드의 정보에 대해 조회하기</a></li>
+</ul>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</section>
+</div>
+<footer class="container-fluid text-center align-content-center footer pb-2">
+<div class="container pt-5">
+<div class="row text-left">
+<div class="col-md-4 col-sm-12">
+<h5>Navigation</h5>
+<ul>
+<li class=nav-item>
+<a class=smooth-scroll href=/#about>About</a>
+</li>
+<li class=nav-item>
+<a class=smooth-scroll href=/#skills>Skills</a>
+</li>
+<li class=nav-item>
+<a class=smooth-scroll href=/#experiences>Experiences</a>
+</li>
+<li class=nav-item>
+<a class=smooth-scroll href=/#education>Education</a>
+</li>
+</ul>
+</div>
+<div class="col-md-4 col-sm-12">
+<h5>Contact me:</h5>
+<ul>
+<li><span>Email: </span> <span>sungwoo.dev@gmail.com</span></li>
+</ul>
+</div>
+</div>
+</div>
+<hr>
+<div class=container>
+<div class="row text-left">
+<div class=col-md-4>
+<a id=theme href=https://github.com/hossainemruz/toha target=_blank rel=noopener>
+<img src=/images/theme-logo_hu8376fd15465fef26ffe66b6bcf0ca686_13669_32x0_resize_box_3.png alt="Toha Theme Logo">
+Toha
+</a>
+</div>
+<div class="col-md-4 text-center">© 2021 Copyright.</div>
+<div class="col-md-4 text-right">
+<a id=hugo href=https://gohugo.io/ target=_blank rel=noopener>Powered by
+<img src=/images/hugo-logo.svg alt="Hugo Logo" height=18>
+</a>
+</div>
+</div>
+</div>
+</footer>
+<script type=text/javascript src=/js/jquery-3.4.1.min.js></script>
+<script type=text/javascript src=/js/popper.min.js></script>
+<script type=text/javascript src=/js/bootstrap.min.js></script>
+<script type=text/javascript src=/js/navbar.js></script>
+<script type=text/javascript src=/js/plyr.js></script>
+<script type=text/javascript src=/js/main.js></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/highlight.min.js></script>
+<script src=/js/single.js></script>
+<script>hljs.initHighlightingOnLoad()</script>
+</body>
+</html>

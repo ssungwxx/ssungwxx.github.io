@@ -1,0 +1,189 @@
+<!doctype html><html>
+<head>
+<title>2-5 Kube Scheduler</title>
+<meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<meta http-equiv=x-ua-compatible content="ie=edge">
+<link rel=stylesheet href=/css/bootstrap.min.css>
+<link rel=stylesheet href=/css/layouts/main.css>
+<link rel=stylesheet href=/css/navigators/navbar.css>
+<link rel=stylesheet href=/css/plyr.css>
+<link rel=stylesheet href=/css/flag-icon.min.css>
+<link href="https://fonts.googleapis.com/css2?family=Muli:wght@300;400;500;600" rel=stylesheet>
+<link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css>
+<link rel=icon type=image/png href=/images/cat_hub23ece23f2d77e6bbe48bda0392cd399_19313_42x0_resize_box_3.png>
+<meta property="og:title" content="2-5 Kube Scheduler">
+<meta property="og:description" content="Kube Secheduler 앞서 이야기했듯이 Kuber scheduler는 노드에 pod에 스케쥴링하는 작업을 담당한다. 여기서 명심해야 할 것은 scheduler는 pod가 어느 노드로 갈지만 결정한다. pod를 생성하는 것과 같은 역할은 kubelet이 담당한다.
+좀 더 자세히 말하자면, 다양한 컨테이너들이 노드위에 적재될 때, 각각 다른 사이즈가 존재할 것이다. 사용자는 당연히 좀 더 효율적인 분배를 원할 것이고 이러한 역할을 scheduler가 담당한다.
+만약 일정양이 필요한 작업이 있고 노드가 여러개 존재한다면 scheduler는 2가지 작업으로 해당 컨테이너를 적절한 노드에 배치한다.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://ssungwxx.github.io/posts/cka/2-5-kube-scheduler/"><meta property="article:section" content="posts">
+<meta property="article:published_time" content="2021-06-11T01:26:33+09:00">
+<meta property="article:modified_time" content="2021-06-11T01:26:33+09:00">
+<meta name=description content="2-5 Kube Scheduler">
+<link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/atom-one-dark.min.css>
+<link rel=stylesheet href=/css/layouts/single.css>
+<link rel=stylesheet href=/css/navigators/sidebar.css>
+<link rel=stylesheet href=/css/style.css>
+</head>
+<body data-spy=scroll data-target=#TableOfContents data-offset=80>
+<div class="container-fluid bg-dimmed wrapper">
+<nav class="navbar navbar-expand-xl top-navbar final-navbar shadow">
+<div class=container>
+<button class="navbar-toggler navbar-light" id=sidebar-toggler type=button onclick=toggleSidebar()>
+<span class=navbar-toggler-icon></span>
+</button>
+<a class=navbar-brand href=/>
+<img src=/images/cat_hub23ece23f2d77e6bbe48bda0392cd399_19313_42x0_resize_box_3.png alt=Logo>
+SugnwooKim's place</a>
+<button class="navbar-toggler navbar-light" id=toc-toggler type=button onclick=toggleTOC()>
+<span class=navbar-toggler-icon></span>
+</button>
+<div class="collapse navbar-collapse lang-selector" id=top-nav-items>
+<ul class="navbar-nav ml-auto">
+</ul>
+</div>
+</div>
+<img src=/images/cat_hub23ece23f2d77e6bbe48bda0392cd399_19313_42x0_resize_box_3.png class=d-none id=main-logo alt=Logo>
+<img src=/images/cat_hub23ece23f2d77e6bbe48bda0392cd399_19313_42x0_resize_box_3.png class=d-none id=inverted-logo alt="Inverted Logo">
+</nav>
+<section class=sidebar-section id=sidebar-section>
+<div class=sidebar-holder>
+<div class=sidebar id=sidebar>
+<form class=mx-auto method=get action=/search>
+<input type=text name=keyword placeholder=Search data-search id=search-box>
+</form>
+<div class=sidebar-tree>
+<ul class=tree id=tree>
+<li id=list-heading><a href=/posts data-filter=all>Posts</a></li>
+<div class=subtree>
+<li><a href=/posts/books/ title=Books>Books</a></li>
+<li><a class=active href=/posts/cka/ title=CKA>CKA</a></li>
+<li><a href=/posts/think/ title=Think>Think</a></li>
+</div>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section class=content-section id=content-section>
+<div class=content>
+<div class="container p-0 read-area">
+<div class="hero-area col-sm-12" id=hero-area style=background-image:url(https://ssungwxx.github.io/images/default-hero.jpg)>
+</div>
+<div class=page-content>
+<div class="author-profile ml-auto align-self-lg-center">
+<img class=rounded-circle src=/images/ssungwxx-cat_hud43b4e68d4b4ab15c9ac212b7a8045bd_2287733_120x120_fit_box_3.png alt="Author Image">
+<h5 class=author-name>Sungwoo Kim</h5>
+<p>June 11, 2021</p>
+</div>
+<div class=title>
+<h1>2-5 Kube Scheduler</h1>
+</div>
+<div class=post-content id=post-content>
+<h1 id=kube-secheduler>Kube Secheduler</h1>
+<p>앞서 이야기했듯이 Kuber scheduler는 노드에 pod에 스케쥴링하는 작업을 담당한다.
+여기서 명심해야 할 것은 scheduler는 pod가 어느 노드로 갈지만 결정한다. pod를 생성하는 것과 같은 역할은 kubelet이 담당한다.</p>
+<p>좀 더 자세히 말하자면, 다양한 컨테이너들이 노드위에 적재될 때, 각각 다른 사이즈가 존재할 것이다. 사용자는 당연히 좀 더 효율적인 분배를 원할 것이고 이러한 역할을 scheduler가 담당한다.</p>
+<p>만약 일정양이 필요한 작업이 있고 노드가 여러개 존재한다면 scheduler는 2가지 작업으로 해당 컨테이너를 적절한 노드에 배치한다.</p>
+<ol>
+<li>Filter nodes</li>
+<li>Rank nodes</li>
+</ol>
+<p>**<em>FilterNodes</em>**는 컨테이너가 필요한 자원보다 적은 자원만 수용가능한 노드들을 선별한다. 만약 CPU 10을 요구하는 컨테이거 잇따면 CPU 10미만의 노드들을 필터링한다.</p>
+<p>**<em>RankNodes</em>**는 남은 노드들 중에서 더 최적화할 수 있는 노드에 최종적으로 컨테이너를 배치한다. 예를 들어 10만큼의 CPU가 필요한 컨테이너가 있고, CPU 12, 16을 가진 노드가 있다고 가정하자. 만약 해당 컨테이너들에 적재된다면 12인 Node는 2만큼의 여유분을 16인 노드는 6만큼의 여유분을 가지게 된다. 이러한 경우 6만큼 남는 노드의 Rank를 더 높다고 측정하여 해당 노드에 배치하게된다.</p>
+<p>Memory 배치 전략에서 <strong><em>Best</em></strong> 랑은 조금 다른 방식의 랭킹이다. 해당 전략에서는 최대한 여유분이 없도록 한다면 쿠버네티스에서는 남은 노드에 더 큰 작업이 올 수 있도록 여유로운 노드에 배치를 한다.</p>
+<h2 id=more-later>More Later&mldr;</h2>
+<ul>
+<li>Resource Requirements and Limits</li>
+<li>Taints and Tolerations</li>
+<li>Node Selectors/Affinity
+와 같은 것들은 해당 섹션이 아닌 뒤에서 다룰 예정이다.</li>
+</ul>
+</div>
+<div class=btn-improve-page>
+<a href=https://github.com/ssungwxx/ssungwxx.github.io/edit/main/content/posts/cka/2-5-kube-scheduler.md title="Improve this page" target=_blank rel=noopener>
+<i class="fas fa-code-branch"></i>
+Improve this page
+</a>
+</div>
+<hr>
+<div class="row next-prev-navigator">
+</div>
+<hr>
+</div>
+</div>
+</div>
+<a id=scroll-to-top class=btn><i class="fas fa-chevron-circle-up"></i></a>
+</section>
+<section class=toc-section id=toc-section>
+<div class=toc-holder>
+<h5 class="text-center pl-3">Table of Contents</h5>
+<hr>
+<div class=toc>
+<nav id=TableOfContents>
+<ul>
+<li><a href=#more-later>More Later&mldr;</a></li>
+</ul>
+</nav>
+</div>
+</div>
+</section>
+</div>
+<footer class="container-fluid text-center align-content-center footer pb-2">
+<div class="container pt-5">
+<div class="row text-left">
+<div class="col-md-4 col-sm-12">
+<h5>Navigation</h5>
+<ul>
+<li class=nav-item>
+<a class=smooth-scroll href=/#about>About</a>
+</li>
+<li class=nav-item>
+<a class=smooth-scroll href=/#skills>Skills</a>
+</li>
+<li class=nav-item>
+<a class=smooth-scroll href=/#experiences>Experiences</a>
+</li>
+<li class=nav-item>
+<a class=smooth-scroll href=/#education>Education</a>
+</li>
+</ul>
+</div>
+<div class="col-md-4 col-sm-12">
+<h5>Contact me:</h5>
+<ul>
+<li><span>Email: </span> <span>sungwoo.dev@gmail.com</span></li>
+</ul>
+</div>
+</div>
+</div>
+<hr>
+<div class=container>
+<div class="row text-left">
+<div class=col-md-4>
+<a id=theme href=https://github.com/hossainemruz/toha target=_blank rel=noopener>
+<img src=/images/theme-logo_hu8376fd15465fef26ffe66b6bcf0ca686_13669_32x0_resize_box_3.png alt="Toha Theme Logo">
+Toha
+</a>
+</div>
+<div class="col-md-4 text-center">© 2021 Copyright.</div>
+<div class="col-md-4 text-right">
+<a id=hugo href=https://gohugo.io/ target=_blank rel=noopener>Powered by
+<img src=/images/hugo-logo.svg alt="Hugo Logo" height=18>
+</a>
+</div>
+</div>
+</div>
+</footer>
+<script type=text/javascript src=/js/jquery-3.4.1.min.js></script>
+<script type=text/javascript src=/js/popper.min.js></script>
+<script type=text/javascript src=/js/bootstrap.min.js></script>
+<script type=text/javascript src=/js/navbar.js></script>
+<script type=text/javascript src=/js/plyr.js></script>
+<script type=text/javascript src=/js/main.js></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/highlight.min.js></script>
+<script src=/js/single.js></script>
+<script>hljs.initHighlightingOnLoad()</script>
+</body>
+</html>

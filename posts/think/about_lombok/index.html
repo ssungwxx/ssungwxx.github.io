@@ -1,0 +1,213 @@
+<!doctype html><html>
+<head>
+<title>Java Lombok 사용에 관하여</title>
+<meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<meta http-equiv=x-ua-compatible content="ie=edge">
+<link rel=stylesheet href=/css/bootstrap.min.css>
+<link rel=stylesheet href=/css/layouts/main.css>
+<link rel=stylesheet href=/css/navigators/navbar.css>
+<link rel=stylesheet href=/css/plyr.css>
+<link rel=stylesheet href=/css/flag-icon.min.css>
+<link href="https://fonts.googleapis.com/css2?family=Muli:wght@300;400;500;600" rel=stylesheet>
+<link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css>
+<link rel=icon type=image/png href=/images/cat_hub23ece23f2d77e6bbe48bda0392cd399_19313_42x0_resize_box_3.png>
+<meta property="og:title" content="Java Lombok 사용에 관하여">
+<meta property="og:description" content="Lomnok에 대한 생각 처음 Lombok을 알게 되었을 때 처음 Lombok을 알게 되었을때는 신세계를 마주한 것만 같았다. 학교에서는 Lombok과 같은 개발도구는 가르쳐주지 않았기 때문에 존재조차 몰랐고, 코딩은 한땀 한땀 만들어가는 결과물인줄만 알았다. 매번 IDE의 힘을 빌려 Getter, Setter를 열어주고 생성자의 갯수를 보면서 잘 생성한게 맞는지 확인하던 코드들이 어노테이션 몇 개를 사용함으로써 코드의 양을 어마어마하게 줄었다.
+그 이후로는, Lombok을 적극 사용했다. 적극 사용하다못해 과하게 사용을 했다라고 표현하는게 맞다. 데이터를 전달하거나 저장하는 역할을 하는 class들에는 자연스럽게 @Getter, @Setter를 붙이고 시작하였다.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://ssungwxx.github.io/posts/think/about_lombok/"><meta property="article:section" content="posts">
+<meta property="article:published_time" content="2021-05-17T20:22:26+09:00">
+<meta property="article:modified_time" content="2021-05-17T20:22:26+09:00">
+<meta name=description content="Java Lombok 사용에 관하여">
+<link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/atom-one-dark.min.css>
+<link rel=stylesheet href=/css/layouts/single.css>
+<link rel=stylesheet href=/css/navigators/sidebar.css>
+<link rel=stylesheet href=/css/style.css>
+</head>
+<body data-spy=scroll data-target=#TableOfContents data-offset=80>
+<div class="container-fluid bg-dimmed wrapper">
+<nav class="navbar navbar-expand-xl top-navbar final-navbar shadow">
+<div class=container>
+<button class="navbar-toggler navbar-light" id=sidebar-toggler type=button onclick=toggleSidebar()>
+<span class=navbar-toggler-icon></span>
+</button>
+<a class=navbar-brand href=/>
+<img src=/images/cat_hub23ece23f2d77e6bbe48bda0392cd399_19313_42x0_resize_box_3.png alt=Logo>
+SugnwooKim's place</a>
+<button class="navbar-toggler navbar-light" id=toc-toggler type=button onclick=toggleTOC()>
+<span class=navbar-toggler-icon></span>
+</button>
+<div class="collapse navbar-collapse lang-selector" id=top-nav-items>
+<ul class="navbar-nav ml-auto">
+</ul>
+</div>
+</div>
+<img src=/images/cat_hub23ece23f2d77e6bbe48bda0392cd399_19313_42x0_resize_box_3.png class=d-none id=main-logo alt=Logo>
+<img src=/images/cat_hub23ece23f2d77e6bbe48bda0392cd399_19313_42x0_resize_box_3.png class=d-none id=inverted-logo alt="Inverted Logo">
+</nav>
+<section class=sidebar-section id=sidebar-section>
+<div class=sidebar-holder>
+<div class=sidebar id=sidebar>
+<form class=mx-auto method=get action=/search>
+<input type=text name=keyword placeholder=Search data-search id=search-box>
+</form>
+<div class=sidebar-tree>
+<ul class=tree id=tree>
+<li id=list-heading><a href=/posts data-filter=all>Posts</a></li>
+<div class=subtree>
+<li><a href=/posts/books/ title=Books>Books</a></li>
+<li><a href=/posts/cka/ title=CKA>CKA</a></li>
+<li><a class=active href=/posts/think/ title=Think>Think</a></li>
+</div>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section class=content-section id=content-section>
+<div class=content>
+<div class="container p-0 read-area">
+<div class="hero-area col-sm-12" id=hero-area style=background-image:url(https://ssungwxx.github.io/images/default-hero.jpg)>
+</div>
+<div class=page-content>
+<div class="author-profile ml-auto align-self-lg-center">
+<img class=rounded-circle src=/images/ssungwxx-cat_hud43b4e68d4b4ab15c9ac212b7a8045bd_2287733_120x120_fit_box_3.png alt="Author Image">
+<h5 class=author-name>Sungwoo Kim</h5>
+<p>May 17, 2021</p>
+</div>
+<div class=title>
+<h1>Java Lombok 사용에 관하여</h1>
+</div>
+<div class=post-content id=post-content>
+<h1 id=lomnok에-대한-생각>Lomnok에 대한 생각</h1>
+<h2 id=처음-lombok을-알게-되었을-때>처음 Lombok을 알게 되었을 때</h2>
+<p>처음 Lombok을 알게 되었을때는 신세계를 마주한 것만 같았다. 학교에서는 Lombok과 같은 개발도구는 가르쳐주지 않았기 때문에 존재조차 몰랐고, 코딩은 한땀 한땀 만들어가는 결과물인줄만 알았다. 매번 IDE의 힘을 빌려 Getter, Setter를 열어주고 생성자의 갯수를 보면서 잘 생성한게 맞는지 확인하던 코드들이 어노테이션 몇 개를 사용함으로써 코드의 양을 어마어마하게 줄었다.</p>
+<p>그 이후로는, Lombok을 적극 사용했다. 적극 사용하다못해 과하게 사용을 했다라고 표현하는게 맞다. 데이터를 전달하거나 저장하는 역할을 하는 class들에는 자연스럽게 <code>@Getter</code>, <code>@Setter</code>를 붙이고 시작하였다. (그나마 다행인건 Entity클래스 마다 <code>@Data</code>를 붙이지는 않았다.) 그 뒤로 Spring을 사용하는 프로젝트는 하지않아서 이러한 잘못된 습관을 인지하지 못한채로 시간이 흘렀다.</p>
+<p>다시 시간이 지나고 Spring의 세계에 뛰어들게 되었다. 그래도 어디서 보고 들은게 있어서 <code>@Setter</code>사용은 자재하였다. 나름대로 합리적으로 사용한다고 생각하였지만, 아는만큼 보인다고 전혀 그러지 못하였다.</p>
+<h2 id=개인적으로-생각하는-lombok사용의-문제점>개인적으로 생각하는 Lombok사용의 문제점</h2>
+<ol>
+<li><code>@AllArgsConstructor</code>를 사용하여 의존관계를 생각없이 늘림</li>
+<li><code>@Getter</code>로 필요하지않은 필드까지 모두 열어버림</li>
+<li><code>@Data</code> 사용 (최악의 어노테이션)</li>
+<li>게을러짐</li>
+</ol>
+<h3 id=allargsconstructor>@AllArgsConstructor</h3>
+<p>Spring에서 의존관계를 맺을때는 주로 생성자 주입을 통해서 의존관계를 맺는다. 이 때, 습관적으로 <code>AllArgsConstructor</code>를 사용했다. 자연스럽게 의존성을 맺으면서 불필요한 생성자 코드를 없애는데 좋다고 생각하였기 때문이다. 하지만 프로젝트를 진행해 나가면서 테스트코드를 작성할 때 고민에 빠지게 되었다. <code>Service layer</code>를 테스트하려는데 <code>Respository mock</code>을 너무 많이 만들게 되면서 반복되는 코드가 많아지고 무언가 잘못되고 있다고 느꼇다.</p>
+<p>근본적인 원인을 찾고자 하였다. 테스트가 어려울때는 대부분 본래의 코드에 문제가 있다고 생각하였기 때문이다. 근본적인 원인은 코드를 편하게 짜려고 하다보니 여러군데에 의존성을 맺은게 문제였다. 그런데 그 의존성을 <code>@AllArgsConstructor</code>이 가리고 있었다. 어노테이션을 제거하고 직접 생성자를 만들어보니 얼마나 잘못된 코드를 짜고 있었는지 한눈에 보였다. 물론 당연한 코드를 없애고 더 빠르게 비즈니스 로직이 포함된 코드가 나오는것도 중요하다. 하지만, 해당 어노테이션으로 없어지는 코드는 클래스마다 유동적이고 실수하기 쉬운 여지를 만들어준다. 이러한 이유로 해당 사례 이후로는 해당 어노테이션을 안쓰려고 노력한다.</p>
+<p>이제는 Entity관점에서 생각해보자. 새로운 Entity객체를 만든다는 것은 곧 Database를 조작하는것과 비슷한 맥락이다. 그래서 무분별한 생성자를 여는 것을 막고 제한된 상황에서만 쓸 수 있도록 해야한다고 생각한다. 이러한 관점에서 Entity에 <code>@AllargsConstructor</code>를 사용하는 것은 엄청난 잘못이라고 생각한다. 필드의 추가/삭제를 항상 생각해야하고 불필요한 필드가 생성되는지 확인해야한다. 특히, Entity이기 때문에 좀 더 신중을 가해야한다. 그렇기 때문에 Entity에는 절대 <code>@AllargsConstructor</code>를 사용하지 말아야한다.</p>
+<h3 id=getter>@Getter</h3>
+<p><code>@Setter</code>의 위험성은 많은 사람들이 알아서 넘어가지만 <code>@Getter</code>는 왜? 라는 생각을 가지신 분들도 있을 것 같다. 하지만 내 경험상 모든 필드에 적용되는 이러한 어노테이션은 사용시 재확인이 필요하다. 가장 큰 이유는 <code>@Getter</code>를 통해 해당 클래스를 사용하는 입장에서 굳이 몰라도 되는 필드까지 열어버리는다는 문제점이 있다. 이는 객체지향의 추구하는 방향과도 다르고 사용할때에도 위화감을 느끼기 힘들다. 굳이 쓰지 않는 메소드를 열어둘 필요가 있을까? 당연히 <strong>NO</strong> 라고 생각한다. 사용되지 않는 메소드는 필요없다. 과한 정보는 오히려 독이다. 그렇기 때문에 생각없이 모든 필드에 메소드를 만드는 <code>Getter</code> 역시 사용에 신중을 가해야한다. 이러한 신중을 가할 시간에 필요에 따라 만들자는 생각을 가지고 있기 때문에 사용하지 않으려고 한다.</p>
+<h3 id=data>@Data</h3>
+<p>개인적으로 생각하는 최악의 어노테이션이다. 해당 어노테이션은 5가지의 어노테이션을 모두 포함한다.</p>
+<ol>
+<li>@Getter</li>
+<li>@Setter</li>
+<li>@RequiredArgsConstructor</li>
+<li>@ToString</li>
+<li>@EqualsAndHashCode</li>
+</ol>
+<p>일단 앞에서 언급한 <code>@Getter</code> 와 <code>@Setter</code> 를 모두 포함하고 있다는 것에서 내 기준에서는 쓸 이유가 모두 사라졌다. <code>@RequiredArgsConstructor</code>를 통해 눈에 보이지 않는 생성자도 만들고 <code>@ToString</code>과 <code>@EqualsAndHashCode</code>까지 사용된다. 모든 필드에 적용되면서 포함하지 않을 필드를 하나하나 지정해서 없애줘야한다.</p>
+<p>그리고 이 모든것들이 <code>@Data</code> 라는 어노테이션 하나로 동작한다. 네이밍도 직관적이지 않다고 생각한다. 물론 5가지의 기능을 모두 포함하기에 어쩔 수 없다. 하지만 피할 수 없는 것도 아니기 때문에 피하면 그만이다. <strong>절대절대</strong> 해당 어노테이션을 사용하지 말자고 강력하게 말하고 싶다.</p>
+<h3 id=게을러짐>게을러짐</h3>
+<p>개인적인 의견이지만 쓰다보니 게을러졌다. 그러면서 자연스럽게 Lombok에 너무 의존하게 되었다. 작성한 클래스들을 살펴보니 대부분의 코드에 Lombok이 들어가 있었고 썩 좋은 모습은 아니라고 생각했다. 어차피 작성해야하는 코드 잠깐 귀찮더라도 직접 작성하고 눈으로 확인하고 의존성을 줄이는 것이 좋다고 생각한다. 물론 Java라는 언어가 가진 고질적인 문제점들이 있지만 어쩌겠는가 이미 거대해진 Java의 생태계는 번거로움을 뛰어넘는 메리트를 가지고 있으니 트레이드 오프라 생각하고 참아야지.</p>
+<h2 id=lombok-제거가-최선인가>Lombok 제거가 최선인가?</h2>
+<p>위와같은 문제점에도 불구하고 Lombok을 안쓸수는 없었다. 현재 진행하고 있는 프로젝트의 기본 패키지 레이어는 <code>application</code>, <code>domain</code>, <code>infrastructure</code>로 구분되는데 적어도 <code>domain</code> 패키지에서는 Lombok을 제거하고자 하는 시도를 했었다. 핵심이 되는 비즈니스 로직이 다른 곳에 의존성을 가지게 하는 것이 싫었고, 사용하면서 무분별하게 다른 곳에서 사용할 수 있도록 여는 습관을 막기 위해서였다.</p>
+<p>처음에는 순조롭게 진행되는 했다. 하지만 필드를 많이 가진 클래스가 필요하거나 핵심이 되는 Entity에 의존관계가 늘어날수록 코드의양은 늘어만 갔다. 특히, <code>Builder</code>패턴을 사용하는 경우 해당 문제가 도드라졌다. 그래서 어쩔수없이 Lombok을 어느정도 허용하였다. 의존성을 가지는것보다 코드를 읽기 어렵게 만드는 것이 더 나쁜 행위라고 생각하였기 때문이다.(프로젝트에서 읽기 어려워지는 기준은 Class를 기준으로 100줄이라고 정하고 진행중에 있다.)</p>
+<p>하지만, 적어도 중요한 비즈니스 로직이 들어가는 패키지에서만큼은 사용을 자재하려고 하는 것만은 변함이 없다. Lombok은 편리함을 통해 많은 중요한 것을 가리고 있기 떄문이다. Java를 사용하면서 뗄레야 뗄 수 없는 모듈이지만 가능하면 사용을 최소한으로 줄이고 순수한 Java로 어플리케이션을 완성하고 싶다. 물론 이루어지기 힘든 꿈이라는것도 알고 있기 때문에 어느정도 타협을 하며 나아갈 것이다.</p>
+</div>
+<div class=btn-improve-page>
+<a href=https://github.com/ssungwxx/ssungwxx.github.io/edit/main/content/posts/think/about_lombok.md title="Improve this page" target=_blank rel=noopener>
+<i class="fas fa-code-branch"></i>
+Improve this page
+</a>
+</div>
+<hr>
+<div class="row next-prev-navigator">
+</div>
+<hr>
+</div>
+</div>
+</div>
+<a id=scroll-to-top class=btn><i class="fas fa-chevron-circle-up"></i></a>
+</section>
+<section class=toc-section id=toc-section>
+<div class=toc-holder>
+<h5 class="text-center pl-3">Table of Contents</h5>
+<hr>
+<div class=toc>
+<nav id=TableOfContents>
+<ul>
+<li><a href=#처음-lombok을-알게-되었을-때>처음 Lombok을 알게 되었을 때</a></li>
+<li><a href=#개인적으로-생각하는-lombok사용의-문제점>개인적으로 생각하는 Lombok사용의 문제점</a>
+<ul>
+<li><a href=#allargsconstructor>@AllArgsConstructor</a></li>
+<li><a href=#getter>@Getter</a></li>
+<li><a href=#data>@Data</a></li>
+<li><a href=#게을러짐>게을러짐</a></li>
+</ul>
+</li>
+<li><a href=#lombok-제거가-최선인가>Lombok 제거가 최선인가?</a></li>
+</ul>
+</nav>
+</div>
+</div>
+</section>
+</div>
+<footer class="container-fluid text-center align-content-center footer pb-2">
+<div class="container pt-5">
+<div class="row text-left">
+<div class="col-md-4 col-sm-12">
+<h5>Navigation</h5>
+<ul>
+<li class=nav-item>
+<a class=smooth-scroll href=/#about>About</a>
+</li>
+<li class=nav-item>
+<a class=smooth-scroll href=/#skills>Skills</a>
+</li>
+<li class=nav-item>
+<a class=smooth-scroll href=/#experiences>Experiences</a>
+</li>
+<li class=nav-item>
+<a class=smooth-scroll href=/#education>Education</a>
+</li>
+</ul>
+</div>
+<div class="col-md-4 col-sm-12">
+<h5>Contact me:</h5>
+<ul>
+<li><span>Email: </span> <span>sungwoo.dev@gmail.com</span></li>
+</ul>
+</div>
+</div>
+</div>
+<hr>
+<div class=container>
+<div class="row text-left">
+<div class=col-md-4>
+<a id=theme href=https://github.com/hossainemruz/toha target=_blank rel=noopener>
+<img src=/images/theme-logo_hu8376fd15465fef26ffe66b6bcf0ca686_13669_32x0_resize_box_3.png alt="Toha Theme Logo">
+Toha
+</a>
+</div>
+<div class="col-md-4 text-center">© 2021 Copyright.</div>
+<div class="col-md-4 text-right">
+<a id=hugo href=https://gohugo.io/ target=_blank rel=noopener>Powered by
+<img src=/images/hugo-logo.svg alt="Hugo Logo" height=18>
+</a>
+</div>
+</div>
+</div>
+</footer>
+<script type=text/javascript src=/js/jquery-3.4.1.min.js></script>
+<script type=text/javascript src=/js/popper.min.js></script>
+<script type=text/javascript src=/js/bootstrap.min.js></script>
+<script type=text/javascript src=/js/navbar.js></script>
+<script type=text/javascript src=/js/plyr.js></script>
+<script type=text/javascript src=/js/main.js></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/highlight.min.js></script>
+<script src=/js/single.js></script>
+<script>hljs.initHighlightingOnLoad()</script>
+</body>
+</html>

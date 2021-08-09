@@ -1,0 +1,248 @@
+<!doctype html><html>
+<head>
+<title>2-2 ETCD</title>
+<meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<meta http-equiv=x-ua-compatible content="ie=edge">
+<link rel=stylesheet href=/css/bootstrap.min.css>
+<link rel=stylesheet href=/css/layouts/main.css>
+<link rel=stylesheet href=/css/navigators/navbar.css>
+<link rel=stylesheet href=/css/plyr.css>
+<link rel=stylesheet href=/css/flag-icon.min.css>
+<link href="https://fonts.googleapis.com/css2?family=Muli:wght@300;400;500;600" rel=stylesheet>
+<link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css>
+<link rel=icon type=image/png href=/images/cat_hub23ece23f2d77e6bbe48bda0392cd399_19313_42x0_resize_box_3.png>
+<meta property="og:title" content="2-2 ETCD">
+<meta property="og:description" content="ETCD란? 해당 강의에서는
+ ETCD is distributed reliable key-value store that is Simple, Secure&Fast.
+ 라고 소개되었다. 현재 ETCD 홈페이지에는
+ A distributed, reliable key-value store for the most critical data of a distributed system
+ 라고 소개되었다.
+Key-value Store Key-value Store는 key 와 value 형태로 저장되는 데이터 베이스이다. 키의 중복은 허용되지 않으며 일반적인 상황의 데이터베이스로는 적합하지않다. 대신 Configuraion과 같은 데이터의 일부를 저장하기에는 적합하다. 왜냐하면 쓰기와 읽기 속도가 빠르기 때문이다.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://ssungwxx.github.io/posts/cka/2-2-etcd/"><meta property="article:section" content="posts">
+<meta property="article:published_time" content="2021-06-06T15:42:19+09:00">
+<meta property="article:modified_time" content="2021-06-06T15:42:19+09:00">
+<meta name=description content="2-2 ETCD">
+<link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/atom-one-dark.min.css>
+<link rel=stylesheet href=/css/layouts/single.css>
+<link rel=stylesheet href=/css/navigators/sidebar.css>
+<link rel=stylesheet href=/css/style.css>
+</head>
+<body data-spy=scroll data-target=#TableOfContents data-offset=80>
+<div class="container-fluid bg-dimmed wrapper">
+<nav class="navbar navbar-expand-xl top-navbar final-navbar shadow">
+<div class=container>
+<button class="navbar-toggler navbar-light" id=sidebar-toggler type=button onclick=toggleSidebar()>
+<span class=navbar-toggler-icon></span>
+</button>
+<a class=navbar-brand href=/>
+<img src=/images/cat_hub23ece23f2d77e6bbe48bda0392cd399_19313_42x0_resize_box_3.png alt=Logo>
+SugnwooKim's place</a>
+<button class="navbar-toggler navbar-light" id=toc-toggler type=button onclick=toggleTOC()>
+<span class=navbar-toggler-icon></span>
+</button>
+<div class="collapse navbar-collapse lang-selector" id=top-nav-items>
+<ul class="navbar-nav ml-auto">
+</ul>
+</div>
+</div>
+<img src=/images/cat_hub23ece23f2d77e6bbe48bda0392cd399_19313_42x0_resize_box_3.png class=d-none id=main-logo alt=Logo>
+<img src=/images/cat_hub23ece23f2d77e6bbe48bda0392cd399_19313_42x0_resize_box_3.png class=d-none id=inverted-logo alt="Inverted Logo">
+</nav>
+<section class=sidebar-section id=sidebar-section>
+<div class=sidebar-holder>
+<div class=sidebar id=sidebar>
+<form class=mx-auto method=get action=/search>
+<input type=text name=keyword placeholder=Search data-search id=search-box>
+</form>
+<div class=sidebar-tree>
+<ul class=tree id=tree>
+<li id=list-heading><a href=/posts data-filter=all>Posts</a></li>
+<div class=subtree>
+<li><a href=/posts/books/ title=Books>Books</a></li>
+<li><a class=active href=/posts/cka/ title=CKA>CKA</a></li>
+<li><a href=/posts/think/ title=Think>Think</a></li>
+</div>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section class=content-section id=content-section>
+<div class=content>
+<div class="container p-0 read-area">
+<div class="hero-area col-sm-12" id=hero-area style=background-image:url(https://ssungwxx.github.io/images/default-hero.jpg)>
+</div>
+<div class=page-content>
+<div class="author-profile ml-auto align-self-lg-center">
+<img class=rounded-circle src=/images/ssungwxx-cat_hud43b4e68d4b4ab15c9ac212b7a8045bd_2287733_120x120_fit_box_3.png alt="Author Image">
+<h5 class=author-name>Sungwoo Kim</h5>
+<p>June 6, 2021</p>
+</div>
+<div class=title>
+<h1>2-2 ETCD</h1>
+</div>
+<div class=post-content id=post-content>
+<h1 id=etcd란>ETCD란?</h1>
+<p>해당 강의에서는</p>
+<blockquote>
+<p>ETCD is distributed reliable key-value store that is Simple, Secure&Fast.</p>
+</blockquote>
+<p>라고 소개되었다. 현재 ETCD 홈페이지에는</p>
+<blockquote>
+<p>A distributed, reliable key-value store for the most critical data of a distributed system</p>
+</blockquote>
+<p>라고 소개되었다.</p>
+<h2 id=key-value-store>Key-value Store</h2>
+<p>Key-value Store는 <strong><em>key</em></strong> 와 <strong><em>value</em></strong> 형태로 저장되는 데이터 베이스이다.
+키의 중복은 허용되지 않으며 일반적인 상황의 데이터베이스로는 적합하지않다. 대신 Configuraion과 같은 데이터의 일부를 저장하기에는 적합하다. 왜냐하면 쓰기와 읽기 속도가 빠르기 때문이다.</p>
+<h1 id=etcd-in-kubernetes>ETCD in Kubernetes</h1>
+<p>쿠버네티스내의 Cluseter들은 nodes, pods, configs, secrests, accounts, roles 그리고 그들을 연결해주는 정보 등 다양한 정보들이 필요한데 이러한 정보들은 ETCD에 저장된다.</p>
+<p>해당 강좌에서는 ETCD의 구성 방법에는 두가지가 있다고한다.</p>
+<ul>
+<li>직접 설치하고 연결하는 방법</li>
+<li>kubeadm으로 자동으로 설치되는 경우</li>
+</ul>
+<h2 id=from-scractch>From scractch</h2>
+<p>만약 직접 설치한다면 ETCD 바이너리 파일을 다운받고 실행시킨다. 그리고 master node에서 직접 지정을 해주어야한다.</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-cmd data-lang=cmd>--advertis-client-urls https://${INTERNAL_AP}:2379
+</code></pre></div><p>이와같은 옵션을 통해서 직접 지정해줄 수 있다.</p>
+<h2 id=kubeadm>Kubeadm</h2>
+<p>기본저긍로는 Kubeadm을 통해 자동으로 생성된다. 생성된 pod는 kube-system 네임스페이스에 <strong><em>etcd-master</em></strong> 라는 이름으로 존재한다.</p>
+<h3 id=ha-environment>HA Environment</h3>
+<p>ETCD를 HA(High availability)모드로 사용할 경우 여러개의 ETCD 인스턴스들을 Master node에 가지게 될 것이다. 이러한 경우 ETCD는 각 서비스가 올바른 정보를 가지고 있는지 확인할 수 있어야한다. 이는 <code>initial-cluster- controller</code> 옵션을 통해 설정할 수 있다.</p>
+<p>위에 관한 더 자세한 내용은 다음에 배울 챕터에서 다룰 예정이다.</p>
+<h2 id=etcdcli>ETCDCLI</h2>
+<h3 id=version의-차이>Version의 차이</h3>
+<p>ETCD의 CLI 조작을 위한 ETCDCTL은 Version2와 Version3에는 차이점이 있다.</p>
+<p>예를들어, Version2에서는 아래와 같은 명령어를 지원한다.</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-cmd data-lang=cmd>etcdtl backup
+etcdtl cluster-health
+etcdtl mk
+etcdtl mkdir
+etcdtl set
+</code></pre></div><p>위와같은 커맨드들은 Version3에서는 아래와 같은 형태로 지원된다.</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-cmd data-lang=cmd>etcdtl snapshot save
+etcdtl endpoint health
+etcdtl get
+etcdtl put
+</code></pre></div><p>API의 버전을 설정하기 위해서는 아래와 같은 명령어를 사용한다.</p>
+<pre><code>export ETCDCTL_API=3
+</code></pre><p>만약 해당 API version이 명시가 되있지 않다면 Version2로 제공될 것이다.</p>
+<h3 id=certificate>Certificate</h3>
+<p>인증을 하기위한 파일은 **<em>ETCD Master</em>**에 포함된다. 설정하는데 필요한 경로는 아래와같다.</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-cmd data-lang=cmd>--cacert /etc/kubernetes/pki/etcd/ca.crt
+--cert /etc/kubernetes/pki/etcd/server.crt
+--key /etc/kubernetes/pki/etcd/server.key
+</code></pre></div><p>복잡해지보이지만 사실 위 내용들은 아래와 같은 명령어로 정의할 수 있다.</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-cmd data-lang=cmd>kubectl exec etcd-master -n kube-system \
+ -- sh -c <span style=color:#e6db74>&#34;ETCDCTL_API=3 \</span>
+ etcdctl get / --prefix \
+ --keys-only \
+ --limit=10 \
+ --cacert /etc/kubernetes/pki/etcd/ca.crt \
+ --cert /etc/kubernetes/pki/etcd/server.crt \
+ --key /etc/kubernetes/pki/etcd/server.key<span style=color:#e6db74>&#34;</span>
+</code></pre></div>
+</div>
+<div class=btn-improve-page>
+<a href=https://github.com/ssungwxx/ssungwxx.github.io/edit/main/content/posts/cka/2-2-etcd.md title="Improve this page" target=_blank rel=noopener>
+<i class="fas fa-code-branch"></i>
+Improve this page
+</a>
+</div>
+<hr>
+<div class="row next-prev-navigator">
+</div>
+<hr>
+</div>
+</div>
+</div>
+<a id=scroll-to-top class=btn><i class="fas fa-chevron-circle-up"></i></a>
+</section>
+<section class=toc-section id=toc-section>
+<div class=toc-holder>
+<h5 class="text-center pl-3">Table of Contents</h5>
+<hr>
+<div class=toc>
+<nav id=TableOfContents>
+<ul>
+<li><a href=#key-value-store>Key-value Store</a></li>
+</ul>
+<ul>
+<li><a href=#from-scractch>From scractch</a></li>
+<li><a href=#kubeadm>Kubeadm</a>
+<ul>
+<li><a href=#ha-environment>HA Environment</a></li>
+</ul>
+</li>
+<li><a href=#etcdcli>ETCDCLI</a>
+<ul>
+<li><a href=#version의-차이>Version의 차이</a></li>
+<li><a href=#certificate>Certificate</a></li>
+</ul>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</section>
+</div>
+<footer class="container-fluid text-center align-content-center footer pb-2">
+<div class="container pt-5">
+<div class="row text-left">
+<div class="col-md-4 col-sm-12">
+<h5>Navigation</h5>
+<ul>
+<li class=nav-item>
+<a class=smooth-scroll href=/#about>About</a>
+</li>
+<li class=nav-item>
+<a class=smooth-scroll href=/#skills>Skills</a>
+</li>
+<li class=nav-item>
+<a class=smooth-scroll href=/#experiences>Experiences</a>
+</li>
+<li class=nav-item>
+<a class=smooth-scroll href=/#education>Education</a>
+</li>
+</ul>
+</div>
+<div class="col-md-4 col-sm-12">
+<h5>Contact me:</h5>
+<ul>
+<li><span>Email: </span> <span>sungwoo.dev@gmail.com</span></li>
+</ul>
+</div>
+</div>
+</div>
+<hr>
+<div class=container>
+<div class="row text-left">
+<div class=col-md-4>
+<a id=theme href=https://github.com/hossainemruz/toha target=_blank rel=noopener>
+<img src=/images/theme-logo_hu8376fd15465fef26ffe66b6bcf0ca686_13669_32x0_resize_box_3.png alt="Toha Theme Logo">
+Toha
+</a>
+</div>
+<div class="col-md-4 text-center">© 2021 Copyright.</div>
+<div class="col-md-4 text-right">
+<a id=hugo href=https://gohugo.io/ target=_blank rel=noopener>Powered by
+<img src=/images/hugo-logo.svg alt="Hugo Logo" height=18>
+</a>
+</div>
+</div>
+</div>
+</footer>
+<script type=text/javascript src=/js/jquery-3.4.1.min.js></script>
+<script type=text/javascript src=/js/popper.min.js></script>
+<script type=text/javascript src=/js/bootstrap.min.js></script>
+<script type=text/javascript src=/js/navbar.js></script>
+<script type=text/javascript src=/js/plyr.js></script>
+<script type=text/javascript src=/js/main.js></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/highlight.min.js></script>
+<script src=/js/single.js></script>
+<script>hljs.initHighlightingOnLoad()</script>
+</body>
+</html>
