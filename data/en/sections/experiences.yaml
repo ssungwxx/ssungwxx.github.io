@@ -23,9 +23,13 @@ experiences:
     # end: Dec 2020
     # give some points about what was your responsibilities at the company.
     responsibilities:
+    - 위협 인텔리전스 서비스 개발 참여(Java11, Spring Boot, Gradle)
     - 위협 인텔리전스 서비스 협력사 데이터 Collector 개발(Java11, Spring Boot, Golang)
-    - 해외 영업을 위한 라이센스 매니저 개발(Java11, Spring Boot, Kubernetes, Prometheus)
-    - 클라우드 서비스를 위한 중앙 로깅 플랫폼 구축 (ELK)
+    - 해외 영업을 위한 라이센스 매니저 개발(Java11, Spring Boot, Kubernetes)
+    - 클라우드 서비스를 위한 모니터링 시스템 구축 (ELK + Prometheus + Kibana)
+    - Test coverage 90% 이상 유지
+    - 적극적인 코드리뷰 경험
+    - Azure Cloud 사용
 
 - company:
     name: Kakao
@@ -40,3 +44,4 @@ experiences:
     - MSA 환경 Tracing관련 오픈조스 조사 (OpenTelemetry, OpenTracing, OpenCensus 위주)
     - OpenTelemetry + Jaeger를 활용한 Tracing 개발 가이드, 데모 어플리케이션 개발
     - Jaeger collector 테스트를 위한 Synthetic-trace-generator 개발 (Golang)
+    - OpenTelemrey specification 잘못된 정보 수정으로 기여
